@@ -1,0 +1,17 @@
+name: Publish Docker image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u mybuilderautomation --password-stdin
+          docker build -t mybuilder/get-github-apps-token:latest ${{ github.workspace }}
+          docker push mybuilder/get-github-apps-token:latest
