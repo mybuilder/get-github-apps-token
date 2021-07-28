@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u mybuilderautomation --password-stdin
-          docker build -t mybuilder/get-github-apps-token:latest ${{ github.workspace }}
-          docker push mybuilder/get-github-apps-token:latest
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u irrelevant-user --password-stdin
+          docker build -t ghcr.io/mybuilder/get-github-apps-token:latest ${{ github.workspace }}
+          docker push ghcr.io/mybuilder/get-github-apps-token:latest
